@@ -1,5 +1,5 @@
+import random
 import numpy
-
 
 
 class Universe:
@@ -7,8 +7,10 @@ class Universe:
     NEIGHBOURS_SHIFT = [(-1, -1), (-1, 0), (-1, 1),
                         (0, -1), (0, 1),
                         (1, -1), (1, 0), (1, 1)]
+
     def __init__(self, dim):
         h, w = dim
+        # Minimum size
         if w < 10 or h < 10:
             w = h = 10
 
@@ -56,3 +58,16 @@ class Universe:
             if self.is_in_space((i, j)) and self.space[i][j] == 1:
                 cnt += 1
         return cnt
+
+    def clear_universe(self):
+        self.space = numpy.zeros(self.dim)
+
+    def random_reset(self, nlives):
+        h, w = self.dim
+        ncells = h * w
+        poss = random.sample(range(ncells), nlives)
+        self.clear_universe()
+        for p in poss:
+            i = p % h
+            j = numpy.math.floor(p / h)
+            self.put_life_in((i, j))
