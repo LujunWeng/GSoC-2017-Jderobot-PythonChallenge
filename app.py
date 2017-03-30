@@ -13,11 +13,13 @@ class GameStatus(Enum):
     ONGOING = 1
 
 class GameOfLife(tk.Frame):
+    WIDTH = 800
+    HEIGHT = 800
     def __init__(self, master=None):
         super().__init__(master)
 
         self.pack()
-        self.canvas = tk.Canvas(self, width=800, height=800)
+        self.canvas = tk.Canvas(self, width=self.WIDTH, height=self.HEIGHT)
         self.canvas.pack(side=tk.BOTTOM)
         self.control_info = tk.Frame(self)
         self.control_info.pack(side=tk.TOP, fill=tk.X)
@@ -32,8 +34,8 @@ class GameOfLife(tk.Frame):
         self.generation_text.pack()
 
         # Read config file
-        self.u = Universe((30, 30))
-        self.nseed = 300
+        self.u = Universe((50, 50))
+        self.nseed = 880
 
         self.status = GameStatus.ONGOING
         self.reset()
@@ -41,8 +43,8 @@ class GameOfLife(tk.Frame):
     def draw(self):
         if self.status == GameStatus.ONGOING:
             self.canvas.delete('all')
-            ds = 30
             h, w = self.u.dim
+            ds = self.WIDTH / max(h, w)
             for i in range(h):
                 for j in range(w):
                     if self.u.space[i][j] == 1:
