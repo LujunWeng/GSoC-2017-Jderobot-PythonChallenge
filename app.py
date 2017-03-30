@@ -72,6 +72,8 @@ class GameOfLife(tk.Frame):
     def pause(self):
         self.status = GameStatus.PAUSE
 
+
 root = tk.Tk()
+root.geometry('+%d+%d' % (200, 200))
 app = GameOfLife(master=root)
 app.mainloop()
