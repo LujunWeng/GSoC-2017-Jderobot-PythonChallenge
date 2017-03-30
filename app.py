@@ -55,7 +55,8 @@ class GameOfLife(tk.Frame):
                     else:
                         self.canvas.create_rectangle(
                             j*ds, i*ds, j*ds+ds, i*ds+ds)
-            self.generation_text_var.set("Generation: {:d}".format(self.u.generation))
+            self.generation_text_var.set("Width: {}, Height: {}, Number of initial seeds: {}\nGeneration: {} ".
+                                         format(self.u.dim[1], self.u.dim[0], self.nseed, self.u.generation))
             self.u.next_generation()
             self.after(1000, self.draw)
 
