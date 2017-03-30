@@ -71,3 +71,4 @@ class Universe:
             i = p % h
             j = numpy.math.floor(p / h)
             self.put_life_in((i, j))
+        self.generation = 0
