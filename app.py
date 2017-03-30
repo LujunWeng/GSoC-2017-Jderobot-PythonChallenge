@@ -5,12 +5,6 @@ from modules.config_reader import ConfigReader
 from modules.conway import Universe
 
 
-def print_universe(u):
-    h, w = u.dim
-    for i in range(h):
-        print(u.space[i])
-
-
 class GameStatus(Enum):
     PAUSE = 0
     ONGOING = 1
