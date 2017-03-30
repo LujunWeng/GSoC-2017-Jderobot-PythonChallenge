@@ -65,6 +65,9 @@ class Universe:
     def random_reset(self, nlives):
         h, w = self.dim
         ncells = h * w
+        # if the number of seeds is greater than the number of cells
+        if nlives > ncells:
+            ncells = nlives
         poss = random.sample(range(ncells), nlives)
         self.clear_universe()
         for p in poss:

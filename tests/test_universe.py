@@ -88,3 +88,11 @@ class TestUniverse(TestCase):
         self.assertEqual(2, u.number_of_neighbours((1, 1)))
         u.put_life_in((1, 0))
         self.assertEqual(3, u.number_of_neighbours((1, 1)))
+
+
+    def test_random_reset(self):
+        u = Universe((10, 10))
+        try:
+            u.random_reset(10000)
+        except ValueError:
+            self.fail("random_reset(10000) raised ValueError")
