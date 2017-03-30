@@ -1,8 +1,7 @@
 from unittest import TestCase
-
 import numpy
-
 from modules.conway import Universe
+
 
 class TestUniverse(TestCase):
     def test_created_earth(self):
