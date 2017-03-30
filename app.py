@@ -1,8 +1,12 @@
 import tkinter as tk
 from enum import Enum
-
+import sys
 from modules.config_reader import ConfigReader
 from modules.conway import Universe
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 
 class GameStatus(Enum):
@@ -35,6 +39,9 @@ class GameOfLife(tk.Frame):
         cfg = ConfigReader()
         cfg.read('./')
         dim = (cfg.height, cfg.width)
+        if cfg.height > 200 or cfg.width > 200:
+            eprint("Height and Width must be equal to less than 200!")
+            sys.exit()
         nos = cfg.numofseed
         self.u = Universe(dim)
         self.nseed = nos
