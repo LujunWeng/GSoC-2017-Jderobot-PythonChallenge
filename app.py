@@ -1,5 +1,7 @@
 import tkinter as tk
 from enum import Enum
+
+from modules.config_reader import ConfigReader
 from modules.conway import Universe
 
 
@@ -8,16 +10,18 @@ def print_universe(u):
     for i in range(h):
         print(u.space[i])
 
+
 class GameStatus(Enum):
     PAUSE = 0
     ONGOING = 1
 
+
 class GameOfLife(tk.Frame):
     WIDTH = 800
     HEIGHT = 800
+
     def __init__(self, master=None):
         super().__init__(master)
-
         self.pack()
         self.canvas = tk.Canvas(self, width=self.WIDTH, height=self.HEIGHT)
         self.canvas.pack(side=tk.BOTTOM)
@@ -34,8 +38,12 @@ class GameOfLife(tk.Frame):
         self.generation_text.pack()
 
         # Read config file
-        self.u = Universe((50, 50))
-        self.nseed = 880
+        cfg = ConfigReader()
+        cfg.read('./')
+        dim = (cfg.height, cfg.width)
+        nos = cfg.numofseed
+        self.u = Universe(dim)
+        self.nseed = nos
 
         self.status = GameStatus.ONGOING
         self.reset()
